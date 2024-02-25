@@ -1,0 +1,72 @@
+server:
+  address:     ":8197"
+  openapiPath: "/api.json"
+  swaggerPath: "/swagger"
+system:
+  notCheckAdminIds: [1]  #无需验证后台权限的用户id
+  cache:
+    model: "redis"  #缓存模式 mem OR redis
+    prefix: "goOne_" #缓存前缀
+
+logger:
+  level : "all"
+  stdout: true
+# 数据库连接配置
+database:
+  logger:
+    path:    "logs/sql"
+    level:   "all"
+    stdout:  true
+  #    ctxKeys: ["RequestId"]
+
+  default:
+    link:   "mysql:root:123456@tcp(127.0.0.1:3306)/one?loc=Local&parseTime=true"
+    debug:  true
+    charset: "utf8mb4" #数据库编码
+    dryRun: false #空跑
+    maxIdle: 10 #连接池最大闲置的连接数
+    maxOpen: 10 #连接池最大打开的连接数
+    maxLifetime: 30 #(单位秒)连接对象可重复使用的时间长度
+
+
+#casbin配置
+casbin:
+  model: "./resource/casbin/rbac_model.conf"
+  # 是否启用casbin
+  enable: true
+  # debug模式
+  debug: false
+  # table name
+  table: "casbin_rule"
+  # 模型配置文件(也可以启动服务时使用-m指定)
+  autoLoad: true
+
+# Redis 配置示例
+redis:
+  # 单实例配置
+  default:
+    address: 127.0.0.1:6379
+    db: 1
+    idleTimeout: 600
+    maxActive: 100
+
+# 文件上传设置
+upload:
+  path: "upload"
+mupload:
+  path: "D:/www/gosingle/upload"
+wework:
+  CorpID: ""
+  CorpSecret: ""
+  AgentID: 1000004
+#  Cache:
+#  RasPrivateKey  string
+  Token: ""
+  EncodingAESKey : ""
+weredis:
+  Host: "127.0.0.1:6379"
+  Database: 0
+  MaxActive: 10
+  MaxIdle: 10
+  IdleTimeout: 60
+front: ""
